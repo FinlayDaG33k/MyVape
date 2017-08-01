@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.finlaydag33k.myvape" version="0.6" versionCode="10" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>MyVape</name>
+    <description>
+    Vape oriënted App using PhoneGap
+  </description>
+    <author email="contact@finlaydag33k.nl" href="https://www.finlaydag33k.nl">
+    FinlayDaG33k
+  </author>
+    <gap:plugin name="cordova-plugin-buildinfo" source="npm" />
+</widget>
