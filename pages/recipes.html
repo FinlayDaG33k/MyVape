@@ -22,7 +22,7 @@ localforage.length().then(function(numberOfKeys) {
         localforage.getItem(recipe).then(function (value) {
           var recipeData = "<ul class=\"list-group\">";
           recipeData += "<li class=\"list-group-item\"><span class=\"badge\">"+value["base"]+"ml</span>Base</li>";
-          var recipeName = recipe.replace(" ", "-");
+          var recipeName = recipe.split(' ').join('-');;
           $.each(value["flavours"], function( index, value ) {
             recipeData += "<li class=\"list-group-item\"><span class=\"badge\">"+value.amount+"ml</span>"+value.name+"</li>";
           });
