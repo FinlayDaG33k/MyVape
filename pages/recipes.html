@@ -22,17 +22,18 @@ localforage.length().then(function(numberOfKeys) {
         localforage.getItem(recipe).then(function (value) {
           var recipeData = "<ul class=\"list-group\">";
           recipeData += "<li class=\"list-group-item\"><span class=\"badge\">"+value["base"]+"ml</span>Base</li>";
+          var recipeName = recipe.replace(" ", "-");
           $.each(value["flavours"], function( index, value ) {
             recipeData += "<li class=\"list-group-item\"><span class=\"badge\">"+value.amount+"ml</span>"+value.name+"</li>";
           });
           recipeData += "</ul>";
-          $("#recipeList").append("<div class=\"panel panel-default\"><a class=\"panel-heading\" data-toggle=\"collapse\" data-target=\"#recipe_"+recipe+"\"><h4 class=\"panel-title\">"+recipe+"</h4></a><div id=\"recipe_"+recipe+"\" class=\"panel-collapse collapse\"><div class=\"panel-body\">"+recipeData+"</div></div></div>");
+          $("#recipeList").append("<div class=\"panel panel-default\"><a class=\"panel-heading\" data-toggle=\"collapse\" data-target=\"#recipe_"+recipeName+"\"><h4 class=\"panel-title\">"+recipe+"</h4></a><div id=\"recipe_"+recipeName+"\" class=\"panel-collapse collapse\"><div class=\"panel-body\">"+recipeData+"</div></div></div>");
         });
       });
     }
 }).catch(function(err) {
     // This code runs if there were any errors
-    console.log(err);
+    $.log(err);
 });
 </script>
 

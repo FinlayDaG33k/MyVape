@@ -1,6 +1,6 @@
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyVape</title>
     <script src="inc/js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" type="text/css" href="inc/css/bootstrap.min.css">
@@ -16,10 +16,6 @@
     <script src="appConfig.js"></script>
 
     <script>
-      if(appConfig["RavenConfig"] != undefined){
-        Raven.config(appConfig["RavenConfig"]).install();
-      }
-
       $.log = function(message){
         console.log("[MyVape] " + message);
       }
@@ -39,6 +35,11 @@
           $(this).collapse('hide');
         }
       });
+
+      if(appConfig["RavenConfig"] != null){
+        $.log("Enabling Raven");
+        Raven.config(appConfig["RavenConfig"]).install();
+      }
     </script>
   </head>
   <body>
