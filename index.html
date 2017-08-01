@@ -40,6 +40,10 @@
         $.log("Enabling Raven");
         Raven.config(appConfig["RavenConfig"]).install();
       }
+
+      document.addEventListener("deviceready", function(){
+        $.log('BuildInfo.version        =' + BuildInfo.version);
+      }, false);
     </script>
   </head>
   <body>
