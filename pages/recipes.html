@@ -1,0 +1,39 @@
+<script>
+var pageConfig = {
+  "title": "Recipes",
+  "description": "All the recipes you've saved"
+};
+</script>
+<style>
+.panel-heading {
+    display: block;
+    cursor: pointer;
+}
+</style>
+<script>
+
+localforage.length().then(function(numberOfKeys) {
+    // Outputs the length of the database.
+    $.log("Found "+numberOfKeys + "Recipes!");
+    for (var i = 0; i < numberOfKeys; i++) {
+      localforage.key(i).then(function(recipe) {
+        $.log("Loading recipe: "+ recipe);
+        // Retrieve the data.
+        localforage.getItem(recipe).then(function (value) {
+          var recipeData = "<ul class=\"list-group\">";
+          recipeData += "<li class=\"list-group-item\"><span class=\"badge\">"+value["base"]+"ml</span>Base</li>";
+          $.each(value["flavours"], function( index, value ) {
+            recipeData += "<li class=\"list-group-item\"><span class=\"badge\">"+value.amount+"ml</span>"+value.name+"</li>";
+          });
+          recipeData += "</ul>";
+          $("#recipeList").append("<div class=\"panel panel-default\"><a class=\"panel-heading\" data-toggle=\"collapse\" data-target=\"#recipe_"+recipe+"\"><h4 class=\"panel-title\">"+recipe+"</h4></a><div id=\"recipe_"+recipe+"\" class=\"panel-collapse collapse\"><div class=\"panel-body\">"+recipeData+"</div></div></div>");
+        });
+      });
+    }
+}).catch(function(err) {
+    // This code runs if there were any errors
+    console.log(err);
+});
+</script>
+
+<div id="recipeList"></div>

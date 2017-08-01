@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns   = "http://www.w3.org/ns/widgets"
+    xmlns:gap   = "http://phonegap.com/ns/1.0"
+    id          = "com.finlaydag33k.myvape"
+    versionCode = "10"
+    version     = "0.5" >
+
+<!-- versionCode is optional and Android only -->
+
+  <name>MyVape</name>
+  <description>
+    Vape oriënted App using PhoneGap
+  </description>
+  <author href="https://www.finlaydag33k.nl" email="contact@finlaydag33k.nl">
+    FinlayDaG33k
+  </author>
+</widget>
