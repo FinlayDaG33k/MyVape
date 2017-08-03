@@ -12,14 +12,14 @@ var pageConfig = {
 </style>
 <script>
 
-localforage.length().then(function(numberOfKeys) {
+storeRecipes.length().then(function(numberOfKeys) {
     // Outputs the length of the database.
     $.log("Found "+numberOfKeys + "Recipes!");
     for (var i = 0; i < numberOfKeys; i++) {
-      localforage.key(i).then(function(recipe) {
+      storeRecipes.key(i).then(function(recipe) {
         $.log("Loading recipe: "+ recipe);
         // Retrieve the data.
-        localforage.getItem(recipe).then(function (value) {
+        storeRecipes.getItem(recipe).then(function (value) {
           var recipeData = "<ul class=\"list-group\">";
           recipeData += "<li class=\"list-group-item\"><span class=\"badge\">"+value["base"]+"ml</span>Base</li>";
           var recipeName = recipe.split(' ').join('-');;

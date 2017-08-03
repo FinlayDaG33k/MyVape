@@ -16,10 +16,12 @@
     <script src="appConfig.js"></script>
 
     <script>
+      /* Function to log to the console (a bit overkill, but makes it easier to figure out what is from MyVape and what isn't) */
       $.log = function(message){
         console.log("[MyVape] " + message);
       }
 
+      /* Function to load a page */
       $.loadpage = function (page){
         // TODO(?): check if page requested actually exists
         $.log("Navigating to: " + page);
@@ -30,20 +32,31 @@
         })
       }
 
+      /* Function to hide the navbar on loading a new page */
       $(document).on('click','.navbar-collapse.in',function(e) {
         if( $(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle' ) {
           $(this).collapse('hide');
         }
       });
 
+      /* Load Raven */
       if(appConfig["RavenConfig"] != null){
         $.log("Enabling Raven");
         Raven.config(appConfig["RavenConfig"]).install();
       }
 
+      /* When the devie is ready */
       document.addEventListener("deviceready", function(){
         $.log('BuildInfo.version        =' + BuildInfo.version);
       }, false);
+
+      /* Create our Databases */
+      var storeRecipes = localforage.createInstance({
+        name: "Recipes"
+      });
+      var storeSettings = localforage.createInstance({
+        name: "Settings"
+      });
     </script>
   </head>
   <body>
