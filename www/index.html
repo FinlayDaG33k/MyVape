@@ -11,6 +11,7 @@
     <script src="inc/js/ripples.min.js"></script>
     <script src="inc/js/less.min.js"></script>
     <script src="inc/js/localforage.min.js"></script>
+    <script src="inc/js/bootstrap-notify.min.js"></script>
 
     <script src="https://cdn.ravenjs.com/3.17.0/raven.min.js" crossorigin="anonymous"></script>
     <script src="appConfig.js"></script>
@@ -20,6 +21,10 @@
       $.log = function(message){
         console.log("[MyVape] " + message);
       }
+
+      $.sendNotification = function(message,type){
+		    $.notify({message: message},{type: type,animate: {enter: 'animated bounceInRight',exit: 'animated bounceOutRight'},delay: 100});
+	    }
 
       /* Function to load a page */
       $.loadpage = function (page){

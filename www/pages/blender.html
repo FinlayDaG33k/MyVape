@@ -54,8 +54,10 @@ function saveRecipe(){
         $.log("Saving recipe as \"" + recipeName + "\"");
         storeRecipes.setItem(recipeName, blendRecipe()).then(function (value) {
           $.log("Successfully saved recipe as \"" + recipeName + "\"");
+          $.sendNotification("<strong>Success!</strong><br />Sucessfully saved "+recipeName+"!","success");
         }).catch(function(err) {
           $.log("Could not save recipe as \"" + recipeName + "\": " + err);
+          $.sendNotification("<strong>Failure!</strong><br />Could not save "+recipeName+"!","danger");
         });
       }else{
         $.log("recipe \"" + recipeName + "\" already exists!");
@@ -63,8 +65,10 @@ function saveRecipe(){
           $.log("Saving recipe as \"" + recipeName + "\"");
           storeRecipes.setItem(recipeName, blendRecipe()).then(function(value) {
             $.log("Successfully saved recipe as \"" + recipeName + "\"");
+            $.sendNotification("<strong>Success!</strong><br />Sucessfully saved "+recipeName+"!","success");
           }).catch(function(err) {
             $.log("Could not save recipe as \"" + recipeName + "\": " + err);
+            $.sendNotification("<strong>Failure!</strong><br />Could not save "+recipeName+"!","danger");
           });
         } else {
           saveRecipe();
