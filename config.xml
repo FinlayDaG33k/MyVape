@@ -1,17 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget xmlns   = "http://www.w3.org/ns/widgets"
-    xmlns:gap   = "http://phonegap.com/ns/1.0"
-    id          = "com.finlaydag33k.myvape"
-    versionCode = "10"
-    version     = "1.0" >
-  <!-- versionCode is optional and Android only -->
-  
-  <name>MyVape</name>
-  <description>
+<widget id="com.finlaydag33k.myvape" version="1.0" versionCode="10" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>MyVape</name>
+    <description>
     Vape oriënted App using PhoneGap
   </description>
-  <author href="https://www.finlaydag33k.nl" email="contact@finlaydag33k.nl">
+    <author email="contact@finlaydag33k.nl" href="https://www.finlaydag33k.nl">
     FinlayDaG33k
   </author>
-  <gap:plugin name="cordova-plugin-buildinfo" source="npm" />
+    <gap:plugin name="cordova-plugin-buildinfo" source="npm" />
+    <engine name="android" spec="~6.1.2" />
 </widget>

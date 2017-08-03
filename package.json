@@ -1,0 +1,13 @@
+{
+    "name": "com.finlaydag33k.myvape",
+    "version": "1.0",
+    "displayName": "MyVape",
+    "cordova": {
+        "platforms": [
+            "android"
+        ]
+    },
+    "dependencies": {
+        "cordova-android": "~6.1.2"
+    }
+}
