@@ -12,9 +12,27 @@ var pageConfig = {
 </style>
 <script>
 
+$(function(){
+  $(document).on('click','[id^="rm_"]',function(e) {
+    var id = $(this).attr('id').split('_');
+    data = id[1].split("recipe")[1];
+    var recipeName = data.split('-').join(' ');
+    if (confirm("You are about to delete recipe \"" + recipeName + "\"!\nDo you want to continue?")) {
+      storeRecipes.removeItem(recipeName).then(function() {
+        $.log(recipeName + " Has been deleted!");
+        $.sendNotification("Successfully deleted recipe \"" + recipeName + "\"!");
+        $("#div_" + id[1]).remove();
+      }).catch(function(err) {
+        $.log("Could not delete recipe \"" + recipeName + "\": " + err);
+        $.sendNotification("Could not delete recipe \"" + recipeName + "\"!");
+      });
+    }
+  });
+});
+
 storeRecipes.length().then(function(numberOfKeys) {
     // Outputs the length of the database.
-    $.log("Found "+numberOfKeys + "Recipes!");
+    $.log("Found "+numberOfKeys + " Recipes!");
     if(numberOfKeys > 0){
       for (var i = 0; i < numberOfKeys; i++) {
         storeRecipes.key(i).then(function(recipe) {
@@ -23,12 +41,12 @@ storeRecipes.length().then(function(numberOfKeys) {
           storeRecipes.getItem(recipe).then(function (value) {
             var recipeData = "<ul class=\"list-group\">";
             recipeData += "<li class=\"list-group-item\"><span class=\"badge\">"+value["base"]+"ml</span>Base</li>";
-            var recipeName = recipe.split(' ').join('-');;
+            var recipeName = recipe.split(' ').join('-');
             $.each(value["flavours"], function( index, value ) {
               recipeData += "<li class=\"list-group-item\"><span class=\"badge\">"+value.amount+"ml</span>"+value.name+"</li>";
             });
             recipeData += "</ul>";
-            $("#recipeList").append("<div class=\"panel panel-default\"><a class=\"panel-heading\" data-toggle=\"collapse\" data-target=\"#recipe_"+recipeName+"\"><h4 class=\"panel-title\">"+recipe+"</h4></a><div id=\"recipe_"+recipeName+"\" class=\"panel-collapse collapse\"><div class=\"panel-body\">"+recipeData+"</div></div></div>");
+            $("#recipeList").append("<div class=\"panel panel-default\" id=\"#div_recipe"+recipeName+"\"><a class=\"panel-heading clearfix\" data-toggle=\"collapse\" data-target=\"#recipe_"+recipeName+"\"><h4 class=\"panel-title pull-left\" style=\"padding-top: 7.5px;\">"+recipe+"</h4>  <button type=\"button\" class=\"btn btn-danger pull-right\" id=\"rm_recipe"+recipeName+"\"><span class=\"fui-trash\"></span></button></a><div id=\"recipe_"+recipeName+"\" class=\"panel-collapse collapse\"><div class=\"panel-body\">"+recipeData+"</div></div></div>");
           });
         });
       }
