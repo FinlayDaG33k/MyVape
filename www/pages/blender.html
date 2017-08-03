@@ -47,28 +47,32 @@ function blendRecipe(){
 function saveRecipe(){
   var recipeName = prompt("Enter recipe name");
   if (recipeName != null) {
-    $.log("Checking if recipe \"" + recipeName + "\" already exists");
-    if (storeRecipes.getItem(recipeName) === null) {
-      $.log("Recipe \"" + recipeName + "\" does not exist!");
-      $.log("Saving recipe as \"" + recipeName + "\"");
-      storeRecipes.setItem(recipeName, blendRecipe()).then(function (value) {
-        $.log("Successfully saved recipe as \"" + recipeName + "\"");
-      }).catch(function(err) {
-        $.log("Could not save recipe as \"" + recipeName + "\": " + err);
-      });
-    }else{
-      $.log("recipe \"" + recipeName + "\" already exists!");
-      if (confirm("Recipe \"" + recipeName + "\" already exists!\nPressing \"OK\" will overwrite the previous recipe.")) {
+    storeRecipes.getItem(recipeName).then(function(value) {
+      $.log("Checking if recipe \"" + recipeName + "\" already exists");
+      if(value === null){
+        $.log("Recipe \"" + recipeName + "\" does not exist!");
         $.log("Saving recipe as \"" + recipeName + "\"");
-        storeRecipes.setItem(recipeName, blendRecipe()).then(function(value) {
+        storeRecipes.setItem(recipeName, blendRecipe()).then(function (value) {
           $.log("Successfully saved recipe as \"" + recipeName + "\"");
         }).catch(function(err) {
           $.log("Could not save recipe as \"" + recipeName + "\": " + err);
         });
-      } else {
-        saveRecipe();
+      }else{
+        $.log("recipe \"" + recipeName + "\" already exists!");
+        if (confirm("Recipe \"" + recipeName + "\" already exists!\nPressing \"OK\" will overwrite the previous recipe.")) {
+          $.log("Saving recipe as \"" + recipeName + "\"");
+          storeRecipes.setItem(recipeName, blendRecipe()).then(function(value) {
+            $.log("Successfully saved recipe as \"" + recipeName + "\"");
+          }).catch(function(err) {
+            $.log("Could not save recipe as \"" + recipeName + "\": " + err);
+          });
+        } else {
+          saveRecipe();
+        }
       }
-    }
+    }).catch(function(err) {
+      $.log(err);
+    });
   }
 }
 
